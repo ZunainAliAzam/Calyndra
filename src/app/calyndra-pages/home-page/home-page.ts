@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -9,6 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./home-page.css']
 })
 export class HomePage {
+
+  constructor(private router: Router) {}
   features = [
     {
       icon: '🚀',
@@ -59,4 +62,8 @@ export class HomePage {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
+  navigateTo(path: string){{
+    this.router.navigate([path]);
+  }}
 }
