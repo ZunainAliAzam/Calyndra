@@ -1,0 +1,239 @@
+<div class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
+    <!-- Navbar -->
+    <nav class="absolute top-8 left-1/2 transform -translate-x-1/2 h-16 w-11/12 max-w-6xl bg-white/10 backdrop-blur-md rounded-3xl py-2.5 px-4 border pointer-events-auto z-10 border-white/20 shadow-lg">
+        <div class="flex justify-between items-center">
+          <img src="assets/images/logo.png" alt="Calyndra Logo" />
+          <ul class="flex gap-8">
+            <li>
+              <a href="#" class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer">Home</a>
+            </li>
+            <li>
+              <a href="#" class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer">Features</a>
+            </li>
+            <li>
+              <a href="#" class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer">Pricing</a>
+            </li>
+            <li>
+              <a href="#" class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer">About</a>
+            </li>
+          </ul>
+    
+          <div class="flex gap-4">
+            <button class="text-white hover:text-purple-200 transition-colors duration-300 cursor-pointer">Login</button>
+            <button class="bg-white/20 text-white px-4 py-2 rounded-2xl hover:bg-white/30 transition-all duration-300 border border-white/30 cursor-pointer">Signup</button>
+          </div>
+        </div>
+      </nav>
+    <section
+      class="min-h-screen text-white flex items-center justify-center relative overflow-hidden"
+    >
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-0 left-0 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"
+        ></div>
+        <div
+          class="absolute top-0 right-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
+        ></div>
+        <div
+          class="absolute bottom-0 left-0 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"
+        ></div>
+      </div>
+    
+      <div class="container mx-auto px-6 py-16 text-center relative z-10">
+        <h1
+          class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
+        >
+          Welcome to Calyndra
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
+          The next generation platform that revolutionizes how you work,
+          collaborate, and achieve your goals.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            class="bg-white text-purple-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105"
+          >
+            Get Started
+          </button>
+          <button
+            (click)="scrollToSection('features')"
+            class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 transform hover:scale-105"
+          >
+            Learn More
+          </button>
+        </div>
+      </div>
+    </section>
+
+</div>
+
+<!-- Features Section -->
+<section id="features" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Why Choose Calyndra?
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Experience the power of modern technology combined with intuitive design
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      @for(feature of features; track feature.title) {
+      <div
+        class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
+      >
+        <div class="text-4xl mb-4">{{ feature.icon }}</div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+          {{ feature.title }}
+        </h3>
+        <p class="text-gray-600">{{ feature.description }}</p>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section
+  class="py-20 bg-gradient-to-r from-purple-600 to-indigo-600 text-white"
+>
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div>
+        <div class="text-4xl md:text-5xl font-bold mb-2">10K+</div>
+        <div class="text-xl">Active Users</div>
+      </div>
+      <div>
+        <div class="text-4xl md:text-5xl font-bold mb-2">99.9%</div>
+        <div class="text-xl">Uptime</div>
+      </div>
+      <div>
+        <div class="text-4xl md:text-5xl font-bold mb-2">24/7</div>
+        <div class="text-xl">Support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        What Our Users Say
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Join thousands of satisfied customers who trust Calyndra
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @for (testimonial of testimonials; track testimonial.name) {
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <div class="flex items-center mb-4">
+          <div class="text-3xl mr-4">{{ testimonial.avatar }}</div>
+          <div>
+            <div class="font-semibold text-gray-900">
+              {{ testimonial.name }}
+            </div>
+            <div class="text-gray-600 text-sm">{{ testimonial.role }}</div>
+          </div>
+        </div>
+        <p class="text-gray-700 italic">"{{ testimonial.content }}"</p>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section
+  class="py-20 bg-gradient-to-r from-indigo-900 to-purple-900 text-white"
+>
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Get Started?</h2>
+    <p class="text-xl mb-8 max-w-2xl mx-auto">
+      Join thousands of users who have already transformed their workflow with
+      Calyndra
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button
+        class="bg-white text-purple-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105"
+      >
+        Start Free Trial
+      </button>
+      <button
+        class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 transform hover:scale-105"
+      >
+        Contact Sales
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-2xl font-bold mb-4">Calyndra</h3>
+        <p class="text-gray-400">
+          Transforming the way you work with modern technology and intuitive
+          design.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Product</h4>
+        <ul class="space-y-2 text-gray-400">
+          <li>
+            <a href="#" class="hover:text-white transition-colors">Features</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition-colors">Pricing</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition-colors"
+              >Documentation</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Company</h4>
+        <ul class="space-y-2 text-gray-400">
+          <li>
+            <a href="#" class="hover:text-white transition-colors">About</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition-colors">Blog</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition-colors">Careers</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Support</h4>
+        <ul class="space-y-2 text-gray-400">
+          <li>
+            <a href="#" class="hover:text-white transition-colors"
+              >Help Center</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition-colors">Contact</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-white transition-colors">Status</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+      <p>&copy; 2024 Calyndra. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
