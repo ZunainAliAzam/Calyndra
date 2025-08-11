@@ -1,0 +1,19 @@
+.mobile-menu-button {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .toolbar-container {
+    padding: 0.5rem;
+  }
+  
+  .mobile-menu-button {
+    margin-right: 0.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-button {
+    display: none;
+  }
+}

@@ -1,0 +1,84 @@
+<div
+  class="h-full bg-gray-800 text-white p-4 rounded-r-2xl shadow-2xl relative sidenav-container"
+>
+  <h1 class="pl-4 text-2xl font-bold mb-8 block md:hidden">Calyndra</h1>
+
+  <!-- Navigation -->
+  <nav class="space-y-2">
+    <a
+      class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
+      (click)="onNavigationClick('home')"
+      [ngClass]="{
+        'justify-center px-0': isCollapsed(),
+        'px-4': !isCollapsed()
+      }"
+    >
+      <mat-icon class="text-gray-300" [class.mr-3]="!isCollapsed()"
+        >dashboard</mat-icon
+      >
+      @if(!isCollapsed()) {
+      <span>Dashboard</span>
+      }
+    </a>
+    <a
+      class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
+      (click)="onNavigationClick('events')"
+      [ngClass]="{
+        'justify-center px-0': isCollapsed(),
+        'px-4': !isCollapsed()
+      }"
+    >
+      <mat-icon class="text-gray-300" [class.mr-3]="!isCollapsed()"
+        >event</mat-icon
+      >
+      @if(!isCollapsed()) {
+      <span>Events</span>
+      }
+    </a>
+    <a
+      class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
+      (click)="onNavigationClick('reports')"
+      [ngClass]="{
+        'justify-center px-0': isCollapsed(),
+        'px-4': !isCollapsed()
+      }"
+    >
+      <mat-icon class="text-gray-300" [class.mr-3]="!isCollapsed()"
+        >analytics</mat-icon
+      >
+      @if(!isCollapsed()) {
+      <span>Reports</span>
+      }
+    </a>
+    <a
+      class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
+      (click)="onNavigationClick('settings')"
+      [ngClass]="{
+        'justify-center px-0': isCollapsed(),
+        'px-4': !isCollapsed()
+      }"
+    >
+      <mat-icon class="text-gray-300" [class.mr-3]="!isCollapsed()"
+        >settings</mat-icon
+      >
+      @if(!isCollapsed()) {
+      <span>Settings</span>
+      }
+    </a>
+    <a
+      class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
+      (click)="onNavigationClick('help')"
+      [ngClass]="{
+        'justify-center px-0': isCollapsed(),
+        'px-4': !isCollapsed()
+      }"
+    >
+      <mat-icon class="text-gray-300" [class.mr-3]="!isCollapsed()"
+        >help</mat-icon
+      >
+      @if(!isCollapsed()) {
+      <span>Help Center</span>
+      }
+    </a>
+  </nav>
+</div>

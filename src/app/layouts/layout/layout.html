@@ -1,0 +1,23 @@
+<div>
+  <app-toolbar></app-toolbar>
+  <div class="min-h-screen">
+    <mat-sidenav-container class="h-full">
+      <mat-sidenav
+        [mode]="sidebarMode()"
+        [opened]="isOpen()"
+        [style.width]="sidebarWidth()"
+        class="!bg-gray-800"
+        (mouseenter)="onSidebarMouseEnter()"
+        (mouseleave)="onSidebarMouseLeave()"
+
+      >
+        <app-sidenav></app-sidenav>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <main class="p-4 bg-white min-h-screen" (click)="onMainContentClick()">
+          <router-outlet></router-outlet>
+        </main>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

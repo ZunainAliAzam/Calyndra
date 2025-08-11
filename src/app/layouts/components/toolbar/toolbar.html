@@ -1,0 +1,20 @@
+<div
+  class="bg-white/70 p-2 gap-4 border-b border-gray-200 rounded-br-xl toolbar-container"
+>
+  <div class="flex items-center justify-between w-full">
+    <h1 class="pl-4 text-2xl font-bold hidden md:block">Calyndra</h1>
+    <button
+      mat-icon-button
+      (click)="toggleSidebar()"
+      class="mobile-menu-button"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="flex items-center gap-4">
+      <button mat-icon-button>
+        <mat-icon class="text-gray-600">notifications</mat-icon>
+      </button>
+      <app-toolbar-user></app-toolbar-user>
+    </div>
+  </div>
+</div>

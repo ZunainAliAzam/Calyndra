@@ -1,0 +1,22 @@
+<div class="relative">
+  <button
+    color="none"
+    [matMenuTriggerFor]="userMenu"
+    class="flex items-center gap-3 hover:bg-gray-100 transition-colors p-2 rounded-xl cursor-pointer"
+  >
+    <span class="text-sm font-medium">Zunain Ali Azam</span>
+    <mat-icon class="text-gray-600">account_circle</mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu" class="!min-w-[200px] !bg-white !rounded-2xl">
+    <div class="px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-100" (click)="navigateToProfile()">
+      <div class="font-medium text-gray-900">Zunain Ali Azam</div>
+      <div class="text-sm text-gray-500">zunain@example.com</div>
+    </div>
+
+    <button mat-menu-item (click)="logout()">
+      <mat-icon class="mr-3">logout</mat-icon>
+      <span>Log Out</span>
+    </button>
+  </mat-menu>
+</div>
