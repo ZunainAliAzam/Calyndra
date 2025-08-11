@@ -1,14 +1,21 @@
-<div class="h-screen flex flex-col">
-  <div class="z-10 relative">
-    <app-toolbar></app-toolbar>
-  </div>
-  <div class="flex-1 relative">
+<div class="h-screen">
+
+  <app-toolbar></app-toolbar>
+  <div class="">
     <mat-sidenav-container class="h-full">
-      <mat-sidenav mode="side" opened class="!w-[280px]">
+      <mat-sidenav
+        [mode]="sidebarMode()"
+        [opened]="isOpen()"
+        [style.width]="sidebarWidth()"
+        class="!bg-gray-800"
+        (mouseenter)="onSidebarMouseEnter()"
+        (mouseleave)="onSidebarMouseLeave()"
+
+      >
         <app-sidenav></app-sidenav>
       </mat-sidenav>
       <mat-sidenav-content>
-        <main class="p-4">
+        <main class="p-4 bg-gray-50 min-h-full" (click)="onMainContentClick()">
           <router-outlet></router-outlet>
         </main>
       </mat-sidenav-content>

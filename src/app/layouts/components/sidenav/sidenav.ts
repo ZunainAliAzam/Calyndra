@@ -1,12 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { SidebarService } from '../../../core/services/sidebar.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidenav',
-  imports: [MatIconModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.css'
 })
 export class Sidenav {
-
+  private sidebarService = inject(SidebarService);
+  
+  // Expose signals for template binding
+  sidebarMode = this.sidebarService.sidebarMode;
+  isOpen = this.sidebarService.isOpen;
+  isCollapsed = this.sidebarService.isCollapsed;
+  
+  toggleSidebar(): void {
+    this.sidebarService.toggle();
+  }
+  
+  onNavigationClick(): void {
+    if (this.sidebarMode() === 'over') {
+      this.sidebarService.close();
+    }
+  }
 }
