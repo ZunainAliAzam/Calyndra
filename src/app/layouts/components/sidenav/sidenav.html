@@ -7,7 +7,7 @@
   <nav class="space-y-2">
     <a
       class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
-      (click)="onNavigationClick()"
+      (click)="onNavigationClick('home')"
       [ngClass]="{
         'justify-center px-0': isCollapsed(),
         'px-4': !isCollapsed()
@@ -22,37 +22,37 @@
     </a>
     <a
       class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
-      (click)="onNavigationClick()"
+      (click)="onNavigationClick('events')"
       [ngClass]="{
         'justify-center px-0': isCollapsed(),
         'px-4': !isCollapsed()
       }"
     >
       <mat-icon class="text-gray-300" [class.mr-3]="!isCollapsed()"
-        >folder</mat-icon
+        >event</mat-icon
       >
       @if(!isCollapsed()) {
-      <span>Projects</span>
+      <span>Events</span>
       }
     </a>
     <a
       class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
-      (click)="onNavigationClick()"
+      (click)="onNavigationClick('reports')"
       [ngClass]="{
         'justify-center px-0': isCollapsed(),
         'px-4': !isCollapsed()
       }"
     >
       <mat-icon class="text-gray-300" [class.mr-3]="!isCollapsed()"
-        >assignment</mat-icon
+        >analytics</mat-icon
       >
       @if(!isCollapsed()) {
-      <span>Tasks</span>
+      <span>Reports</span>
       }
     </a>
     <a
       class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
-      (click)="onNavigationClick()"
+      (click)="onNavigationClick('settings')"
       [ngClass]="{
         'justify-center px-0': isCollapsed(),
         'px-4': !isCollapsed()
@@ -63,6 +63,21 @@
       >
       @if(!isCollapsed()) {
       <span>Settings</span>
+      }
+    </a>
+    <a
+      class="nav-item flex items-center py-2 rounded hover:bg-gray-700 transition-colors"
+      (click)="onNavigationClick('help')"
+      [ngClass]="{
+        'justify-center px-0': isCollapsed(),
+        'px-4': !isCollapsed()
+      }"
+    >
+      <mat-icon class="text-gray-300" [class.mr-3]="!isCollapsed()"
+        >help</mat-icon
+      >
+      @if(!isCollapsed()) {
+      <span>Help Center</span>
       }
     </a>
   </nav>

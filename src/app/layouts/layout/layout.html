@@ -1,7 +1,6 @@
-<div class="h-screen">
-
+<div>
   <app-toolbar></app-toolbar>
-  <div class="">
+  <div class="min-h-screen">
     <mat-sidenav-container class="h-full">
       <mat-sidenav
         [mode]="sidebarMode()"
@@ -15,7 +14,7 @@
         <app-sidenav></app-sidenav>
       </mat-sidenav>
       <mat-sidenav-content>
-        <main class="p-4 bg-gray-50 min-h-full" (click)="onMainContentClick()">
+        <main class="p-4 bg-white min-h-screen" (click)="onMainContentClick()">
           <router-outlet></router-outlet>
         </main>
       </mat-sidenav-content>
