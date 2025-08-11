@@ -63,7 +63,7 @@ export class HomePage {
     }
   }
 
-  navigateTo(path: string){{
+  navigateTo(path: string){
     this.router.navigate([path]);
-  }}
+  }
 }
