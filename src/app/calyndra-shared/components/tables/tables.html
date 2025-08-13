@@ -1,0 +1,182 @@
+<div class="p-4 bg-white">
+  <div class="flex flex-wrap gap-5">
+    @if(config.searchFilter){
+    <div
+      class="flex flex-row rounded h-10 w-48 items-center border border-gray-100 pointer-events-auto"
+    >
+      <mat-icon matIconPrefix class="ml-3">search</mat-icon>
+      <input
+        type="text"
+        [ngModel]="searchFilter()"
+        (ngModelChange)="updateSearch($event)"
+        placeholder="Search"
+        class="focus:outline-none pl-2 w-full"
+      />
+    </div>
+    } @if(config.dateFilter.name){
+    <div class="flex flex-col">
+      <div
+        class="rounded p-2 px-4 w-[240px] flex h-10 justify-center items-center border border-gray-100 pointer-events-auto"
+      >
+        <mat-date-range-input [rangePicker]="formDateRangePickerRef">
+          <input
+            matStartDate
+            readonly
+            placeholder="Start date"
+            [min]="config.dateFilter.min"
+            [max]="config.dateFilter.max"
+            [ngModel]="dateRangeFilter().startDate"
+            (ngModelChange)="
+              updateDateFilter($event, dateRangeFilter().endDate)
+            "
+          />
+          <input
+            matEndDate
+            readonly
+            placeholder="End date"
+            [min]="config.dateFilter.min"
+            [max]="config.dateFilter.max"
+            [ngModel]="dateRangeFilter().endDate"
+            (ngModelChange)="
+              updateDateFilter(dateRangeFilter().startDate, $event)
+            "
+          />
+        </mat-date-range-input>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="formDateRangePickerRef"
+        ></mat-datepicker-toggle>
+        <mat-date-range-picker #formDateRangePickerRef>
+          <mat-date-range-picker-actions>
+            <button
+              mat-button
+              matDateRangePickerCancel
+              color="primary"
+              (click)="updateDateFilter(null, null)"
+            >
+              Clear
+            </button>
+            <button
+              mat-button
+              matDateRangePickerApply
+              color="primary"
+              (click)="
+                updateDateFilter(
+                  dateRangeFilter().startDate,
+                  dateRangeFilter().endDate
+                )
+              "
+            >
+              Apply
+            </button>
+          </mat-date-range-picker-actions>
+        </mat-date-range-picker>
+      </div>
+    </div>
+    }
+    <div class="flex items-center gap-8">
+      @if(config.dropdowns && config.dropdowns.length > 0) { @for(filter of
+      config.dropdowns; track filter.name) {
+      <div class="flex items-center gap-2" [ngStyle]="{ width: filter.width }">
+        @if(filter.isLoading) {
+        <mat-progress-spinner
+          mode="indeterminate"
+          [diameter]="25"
+          [color]="'primary'"
+        ></mat-progress-spinner>
+        } @else {
+        <mat-select
+          [(ngModel)]="filter.value"
+          [placeholder]="filter.displayName"
+          (valueChange)="updateDropdownFilter(filter.name, $event)"
+          class="border border-gray-100 rounded p-2 px-4 w-[240px] flex h-10 justify-center items-center !text-sm"
+        >
+          @if(filter.optionList && filter.optionList.length > 0) { @for(option
+          of filter.optionList; track option.key) {
+          <mat-option [value]="option.key">
+            {{ option.value }}
+          </mat-option>
+          } }
+        </mat-select>
+        }
+      </div>
+      } }
+    </div>
+  </div>
+  <div class="mt-4">
+    @if(config.showLoader){
+    <div class="flex justify-center pt-4">
+      <mat-progress-spinner
+        mode="indeterminate"
+        [diameter]="25"
+        [color]="'primary'"
+      ></mat-progress-spinner>
+    </div>
+    }@else{
+    <table
+      mat-table
+      [dataSource]="dataSource()"
+      class="w-full min-w-[60rem] !bg-white"
+      matSort
+    >
+      @for(column of config.columns; track trackByProperty($index, column)){
+      <ng-container [matColumnDef]="column.property">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          class="!bg-gray-100 !text-sm !text-gray-500"
+        >
+          {{ column.label }}
+        </th>
+        <td mat-cell *matCellDef="let row" class="!text-sm !text-gray-500">
+          @if(column.property == 'event'){
+          <div class="flex flex-row gap-4 items-center my-2">
+            <div class="flex flex-col items-center">
+              <span class="text-orange-500 text-xs font-semibold uppercase">
+                {{ row.date | date : "MMM" }}
+              </span>
+              <span class="text-gray-800 text-2xl font-bold">
+                {{ row.date | date : "dd" }}
+              </span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <span class="font-semibold">
+                {{ row[column.property] }}
+              </span>
+              <p class="flex flex-col text-gray-500 text-xs">
+                <span>Online event</span>
+                <span>
+                  {{ row.date | date : "EEEE, MMMM d, y 'at' h:mm a zzzz" }}
+                </span>
+              </p>
+            </div>
+          </div>
+          } @else {
+          {{ row[column.property] }}
+          }
+        </td>
+      </ng-container>
+      }
+
+      <tr mat-header-row *matHeaderRowDef="visibleColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: visibleColumns"
+        class="transition duration-400 ease-out cursor-pointer"
+      ></tr>
+    </table>
+    } @if (config.count == 0 && !config.showLoader) {
+    <div class="m-4 font-semibold text-lg flex justify-center text-gray-950">
+      <span translate>No records found</span>
+    </div>
+    }
+    <mat-paginator
+      [length]="config.count"
+      [pageSize]="config.pageSize"
+      [pageSizeOptions]="config.pageSizeOptions"
+      (page)="updatePagination($event)"
+      class="sticky left-0 mt-2 !rounded-b-2xl"
+    ></mat-paginator>
+  </div>
+</div>
