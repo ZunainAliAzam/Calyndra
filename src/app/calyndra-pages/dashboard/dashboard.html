@@ -1,0 +1,77 @@
+<div class="flex flex-col gap-10 p-10">
+  <div class="flex flex-col gap-4">
+    <h1 class="text-[2.5rem] font-bold">Hi there, {{ user.name }}</h1>
+  </div>
+  <div class="flex flex-col gap-4">
+    <p class="text-2xl font-bold">Create your first event</p>
+    <div class="flex gap-12">
+      <div class="flex flex-col bg-white w-[320px] rounded-2xl hover:shadow-md">
+        <img
+          src="placeholder/create-event.png"
+          alt="Start from scratch"
+          class="w-full p-10 bg-blue-200 flex self-center object-contain rounded-t-2xl"
+        />
+        <div class="flex justify-between items-center gap-2 py-6 px-4 rounded-md">
+          <div class="flex flex-col">
+            <h2 class="text-lg font-bold">Start from scratch</h2>
+            <p class="text-sm text-gray-700">Create a new event from scratch</p>
+          </div>
+          <button
+            class="bg-blue-500 text-white flex self-center rounded-full p-2 transition-all duration-300 hover:bg-blue-600"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-col bg-white w-[320px] rounded-2xl hover:shadow-md">
+        <img
+          src="placeholder/create-event.png"
+          alt="Start from scratch"
+          class="w-full p-10 bg-blue-200 flex self-center object-contain rounded-t-2xl"
+        />
+        <div class="flex justify-between items-center gap-2 py-6 px-4 rounded-md">
+          <div class="flex flex-col">
+            <h2 class="text-lg font-bold">Create event with AI</h2>
+            <p class="text-sm text-gray-700">Create a new event with AI</p>
+          </div>
+          <button
+            class="bg-blue-500 text-white flex self-center rounded-full p-2 transition-all duration-300 hover:bg-blue-600"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="flex flex-col gap-4">
+    <h1 class="text-2xl font-bold">So far Calyndra has served</h1>
+    <div class="flex gap-4">
+      <div class="flex gap-4 bg-gray-50 w-[59%] p-4">
+        <div class="flex flex-col gap-2 border border-gray-100 p-4">
+          <h2 class="text-3xl text-center font-bold text-blue-500">2.3k</h2>
+          <p class="text-sm text-gray-700">total events organized</p>
+        </div>
+        <!-- Vertical separator -->
+        <div class="w-px bg-gray-200"></div>
+        <div class="flex flex-col gap-2 border border-gray-100 p-4">
+          <h2 class="text-3xl text-center font-bold text-green-500">200k</h2>
+          <p class="text-sm text-gray-700">people attended our events</p>
+        </div>
+        <!-- Vertical separator -->
+        <div class="w-px bg-gray-200"></div>
+        <div class="flex flex-col gap-2 border border-gray-100 p-4">
+          <h2 class="text-3xl text-center font-bold text-cyan-500 ">13.3k</h2>
+          <p class="text-sm text-gray-700">people searched for events</p>
+        </div>
+      </div>
+      <div class="flex text-blue-500 gap-2 border border-gray-100 p-4 hover:bg-gray-50 rounded-2xl cursor-pointer">
+        <div class="flex self-center items-center gap-2">
+          <mat-icon>add</mat-icon>
+          <p class="text-sm text-gray-700">Create an event</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MaterialModule } from "../../../calyndra-shared/material.module";
 import { ToolbarUser } from "./toolbar-user/toolbar-user";
+import { SidebarService } from '../../../core/services/sidebar.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,5 +10,11 @@ import { ToolbarUser } from "./toolbar-user/toolbar-user";
   styleUrl: './toolbar.css'
 })
 export class Toolbar {
-
+  private sidebarService = inject(SidebarService);
+  
+  isOpen = this.sidebarService.isOpen;
+  
+  toggleSidebar(): void {
+    this.sidebarService.toggle();
+  }
 }
