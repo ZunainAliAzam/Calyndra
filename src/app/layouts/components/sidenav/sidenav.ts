@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { SidebarService } from '../../../core/services/sidebar.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { SidebarService } from '../../../calyndra-shared/services/sidebar.service';
 
 @Component({
   selector: 'app-sidenav',
