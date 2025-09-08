@@ -1,71 +1,168 @@
 <div class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
-    <!-- Navbar -->
-    <nav class="absolute top-8 left-1/2 transform -translate-x-1/2 h-16 w-11/12 max-w-6xl bg-white/10 backdrop-blur-md rounded-3xl py-2.5 px-4 border pointer-events-auto z-10 border-white/20 shadow-lg">
-        <div class="flex justify-between items-center">
-          <img src="assets/images/logo.png" alt="Calyndra Logo" />
-          <ul class="flex gap-8">
-            <li>
-              <a href="#" class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer">Home</a>
-            </li>
-            <li>
-              <a href="#" class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer">Features</a>
-            </li>
-            <li>
-              <a href="#" class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer">Pricing</a>
-            </li>
-            <li>
-              <a href="#" class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer">About</a>
-            </li>
-          </ul>
-    
-          <div class="flex gap-4">
-            <button class="text-white hover:text-purple-200 transition-colors duration-300 cursor-pointer" (click)="navigateTo('/login')">Login</button>
-            <button class="bg-white/20 text-white px-4 py-2 rounded-2xl hover:bg-white/30 transition-all duration-300 border border-white/30 cursor-pointer" (click)="navigateTo('/signup')">Signup</button>
-          </div>
-        </div>
-      </nav>
-    <section
-      class="min-h-screen text-white flex items-center justify-center relative overflow-hidden"
-    >
-      <!-- Background Pattern -->
-      <div class="absolute inset-0 opacity-10">
-        <div
-          class="absolute top-0 left-0 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"
-        ></div>
-        <div
-          class="absolute top-0 right-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
-        ></div>
-        <div
-          class="absolute bottom-0 left-0 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"
-        ></div>
-      </div>
-    
-      <div class="container mx-auto px-6 py-16 text-center relative z-10">
-        <h1
-          class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
-        >
-          Welcome to Calyndra
-        </h1>
-        <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
-          The next generation platform that revolutionizes how you work,
-          collaborate, and achieve your goals.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            class="bg-white text-purple-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105"
+  <!-- Navbar -->
+  <nav
+    class="absolute top-8 left-1/2 transform -translate-x-1/2 h-16 w-11/12 max-w-6xl bg-white/10 backdrop-blur-md rounded-3xl py-2.5 px-4 border pointer-events-auto z-10 border-white/20 shadow-lg"
+  >
+    <div class="flex justify-between items-center">
+      <img src="assets/images/logo.png" alt="Calyndra Logo" />
+      <ul class="flex gap-8">
+        <li>
+          <a
+            href="#"
+            class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer"
+            >Home</a
           >
-            Get Started
-          </button>
-          <button
-            (click)="scrollToSection('features')"
-            class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 transform hover:scale-105"
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer"
+            >Features</a
           >
-            Learn More
-          </button>
-        </div>
-      </div>
-    </section>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer"
+            >Pricing</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="text-white hover:text-purple-200 hover:font-medium transition-colors duration-300 cursor-pointer"
+            >About</a
+          >
+        </li>
+      </ul>
 
+      @if(isAuthenticated() === true) {
+      <div class="flex gap-4">
+        <div class="relative">
+          <button
+            color="none"
+            [matMenuTriggerFor]="userMenu"
+            class="flex items-center gap-3 hover:border hover:border-gray-100 text-white transition-colors p-2 rounded-xl cursor-pointer"
+          >
+            <span class="text-sm font-medium">{{
+              user()?.username || "Guest"
+            }}</span>
+            <mat-icon class="text-gray-600">account_circle</mat-icon>
+          </button>
+
+          <mat-menu
+            #userMenu="matMenu"
+            class="!min-w-[200px] !bg-white !rounded-2xl"
+          >
+            <div
+              class="px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-100"
+              (click)="navigateToProfile()"
+            >
+              <div class="font-medium text-gray-900">
+                {{ user()?.username || "Guest" }}
+              </div>
+              <div class="text-sm text-gray-500">
+                {{ user()?.email || "No email" }}
+              </div>
+            </div>
+            <ul class="text-sm text-gray-500 p">
+              <li
+                class="py-4 cursor-pointer hover:bg-gray-100"
+                (click)="navigateTo('/org/home')"
+              >
+                <span class="ml-4"> Dashboard </span>
+              </li>
+              <li
+                class="py-4 cursor-pointer hover:bg-gray-100"
+                (click)="navigateTo('/org/events')"
+              >
+                <span class="ml-4"> Manage my events </span>
+              </li>
+              <li
+                class="py-4 cursor-pointer hover:bg-gray-100"
+                (click)="navigateTo('/org/events')"
+              >
+                <span class="ml-4">Browse events</span>
+              </li>
+              <li
+                class="py-4 cursor-pointer hover:bg-gray-100"
+                (click)="navigateTo('/org/events')"
+              >
+                <span class="ml-4">Liked</span>
+              </li>
+              <li
+                class="py-4 cursor-pointer hover:bg-gray-100"
+                (click)="navigateTo('/org/events')"
+              >
+                <span class="ml-4">Following</span>
+              </li>
+            </ul>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon class="mr-3">logout</mat-icon>
+              <span>Log Out</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      } @else {
+      <div class="flex gap-4">
+        <button
+          class="text-white hover:text-purple-200 transition-colors duration-300 cursor-pointer"
+          (click)="navigateTo('/login')"
+        >
+          Login
+        </button>
+        <button
+          class="bg-white/20 text-white px-4 py-2 rounded-2xl hover:bg-white/30 transition-all duration-300 border border-white/30 cursor-pointer"
+          (click)="navigateTo('/signup')"
+        >
+          Signup
+        </button>
+      </div>
+      }
+    </div>
+  </nav>
+  <section
+    class="min-h-screen text-white flex items-center justify-center relative overflow-hidden"
+  >
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div
+        class="absolute top-0 left-0 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"
+      ></div>
+      <div
+        class="absolute top-0 right-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"
+      ></div>
+    </div>
+
+    <div class="container mx-auto px-6 py-16 text-center relative z-10">
+      <h1
+        class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
+      >
+        Welcome to Calyndra
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
+        The next generation platform that revolutionizes how you work,
+        collaborate, and achieve your goals.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button
+          class="bg-white text-purple-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105"
+        >
+          Get Started
+        </button>
+        <button
+          (click)="scrollToSection('features')"
+          class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 transform hover:scale-105"
+        >
+          Learn More
+        </button>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- Features Section -->

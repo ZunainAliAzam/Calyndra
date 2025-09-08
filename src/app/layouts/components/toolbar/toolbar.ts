@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MaterialModule } from "../../../calyndra-shared/material.module";
 import { ToolbarUser } from "./toolbar-user/toolbar-user";
-import { SidebarService } from '../../../core/services/sidebar.service';
+import { SidebarService } from '../../../calyndra-shared/services/sidebar.service';
 
 @Component({
   selector: 'app-toolbar',

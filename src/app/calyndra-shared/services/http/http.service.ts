@@ -7,8 +7,8 @@ import {
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
-import { RoutingService } from '../routing/routing';
-import { UtilitiesService } from '../utilities/utilities';
+import { RoutingService } from '../routing/routing.service';
+import { UtilitiesService } from '../utilities/utilities.service';
 
 export interface HttpRequestMessage {
   success: string;
@@ -36,7 +36,8 @@ export class HttpService {
     private utilitiesService: UtilitiesService,
     private router: Router
   ) {
-    this.baseUrl = 'https://localhost:3000/api';
+    // Use HTTP for local development to avoid SSL issues
+    this.baseUrl = 'http://localhost:3000';
     this.requestHeader = new HttpHeaders({
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -101,12 +102,12 @@ export class HttpService {
     this.request('GET', requestUrl, userMessages, undefined, params);
   }
 
-  HttpPost(requestUrl: string, userMessages: HttpRequestMessage, body?: any) {
-    this.request('POST', requestUrl, body, userMessages);
+  HttpPost(requestUrl: string, body: any, userMessages: HttpRequestMessage) {
+    this.request('POST', requestUrl, userMessages, body);
   }
 
-  HttpPut(requestUrl: string, userMessages: HttpRequestMessage, body?: any) {
-    this.request('PUT', requestUrl, body, userMessages);
+  HttpPut(requestUrl: string, body: any, userMessages: HttpRequestMessage) {
+    this.request('PUT', requestUrl, userMessages, body);
   }
 
   HttpDelete(requestUrl: string, userMessages: HttpRequestMessage) {

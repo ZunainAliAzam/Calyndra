@@ -8,14 +8,16 @@ import { Events } from './calyndra-pages/events/events';
 import { Reports } from './calyndra-pages/reports/reports';
 import { Settings } from './calyndra-pages/settings/settings';
 import { HelpCenter } from './calyndra-pages/help-center/help-center';
+import { authGuard, loginGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomePage },
-  { path: 'login', component: Login },
-  { path: 'signup', component: Login },
+  { path: 'login', component: Login, canActivate: [loginGuard] },
+  { path: 'signup', component: Login, canActivate: [loginGuard] },
   {
     path: 'org',
     component: Layout,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Dashboard },
@@ -25,6 +27,6 @@ export const routes: Routes = [
       { path: 'help', component: HelpCenter },
     ],
   },
-  { path: 'profile', component: ProfilePage },
+  { path: 'profile', component: ProfilePage, canActivate: [authGuard] },
   { path: '**', redirectTo: '' },
 ];
