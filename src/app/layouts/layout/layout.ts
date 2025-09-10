@@ -3,8 +3,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
 import { Sidenav } from "../components/sidenav/sidenav";
 import { Toolbar } from "../components/toolbar/toolbar";
-import { SidebarService } from '../../core/services/sidebar.service';
 import { CommonModule } from '@angular/common';
+import { SidebarService } from '../../calyndra-shared/services/sidebar.service';
 
 @Component({
   standalone: true,

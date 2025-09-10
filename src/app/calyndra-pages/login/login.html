@@ -11,10 +11,10 @@
 
     <!-- Login Form -->
     @if(isLoginMode) {
-    <form class="space-y-6" (ngSubmit)="onSubmit()">
+    <form [formGroup]="loginForm" class="space-y-6" (ngSubmit)="onSubmit()">
       <!-- Username Field -->
       <div class="space-y-2">
-        <label class="text-sm font-medium text-gray-700">Username</label>
+        <label class="text-sm font-medium text-gray-700">Email</label>
         <div class="relative">
           <div
             class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
@@ -29,18 +29,23 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
             </svg>
           </div>
           <input
-            type="text"
-            placeholder="Type your username"
+            type="email"
+            placeholder="Type your email"
             class="w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-purple-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-400 transition-colors duration-200"
-            [(ngModel)]="loginData.username"
-            name="username"
+            formControlName="email"
+            [class.border-red-500]="hasError(loginForm, 'email')"
           />
         </div>
+        @if(hasError(loginForm, 'email')) {
+        <p class="text-sm text-red-500">
+          {{ getErrorMessage(loginForm, "email") }}
+        </p>
+        }
       </div>
 
       <!-- Password Field -->
@@ -68,8 +73,8 @@
             [type]="showLoginPassword ? 'text' : 'password'"
             placeholder="Type your password"
             class="w-full pl-10 pr-12 py-3 border-b border-gray-300 focus:border-purple-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-400 transition-colors duration-200"
-            [(ngModel)]="loginData.password"
-            name="password"
+            formControlName="password"
+            [class.border-red-500]="hasError(loginForm, 'password')"
           />
           <button
             type="button"
@@ -113,6 +118,11 @@
             }
           </button>
         </div>
+        @if(hasError(loginForm, 'password')) {
+        <p class="text-sm text-red-500">
+          {{ getErrorMessage(loginForm, "password") }}
+        </p>
+        }
         <div class="flex justify-end">
           <a
             href="#"
@@ -125,44 +135,90 @@
       <!-- Login Button -->
       <button
         type="submit"
-        class="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg"
+        [disabled]="loginForm.invalid || isLoading"
+        class="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
       >
-        LOGIN
+        @if(isLoading) {
+        <span>Logging in...</span>
+        } @else {
+        <span>LOGIN</span>
+        }
       </button>
     </form>
     }
 
     <!-- Signup Form -->
     @if(!isLoginMode) {
-    <form class="space-y-6" (ngSubmit)="onSubmit()">
+    <form [formGroup]="signupForm" class="space-y-6" (ngSubmit)="onSubmit()">
       <!-- Username Field -->
-      <div class="space-y-2">
-        <label class="text-sm font-medium text-gray-700">Username</label>
-        <div class="relative">
-          <div
-            class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-          >
-            <svg
-              class="h-5 w-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+      <div class="flex gap-4">
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-700">First Name</label>
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
+              <svg
+                class="h-5 w-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="First Name"
+              class="w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-purple-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-400 transition-colors duration-200"
+              formControlName="firstName"
+              [class.border-red-500]="hasError(signupForm, 'firstName')"
+            />
           </div>
-          <input
-            type="text"
-            placeholder="Type your username"
-            class="w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-purple-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-400 transition-colors duration-200"
-            [(ngModel)]="signupData.username"
-            name="signupUsername"
-          />
+          @if(hasError(signupForm, 'firstName')) {
+          <p class="text-sm text-red-500">
+            {{ getErrorMessage(signupForm, "firstName") }}
+          </p>
+          }
+        </div>
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-gray-700">Last Name</label>
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none"
+            >
+              <svg
+                class="h-5 w-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Last Name"
+              class="w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-purple-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-400 transition-colors duration-200"
+              formControlName="lastName"
+              [class.border-red-500]="hasError(signupForm, 'lastName')"
+            />
+          </div>
+          @if(hasError(signupForm, 'lastName')) {
+          <p class="text-sm text-red-500">
+            {{ getErrorMessage(signupForm, "lastName") }}
+          </p>
+          }
         </div>
       </div>
 
@@ -191,10 +247,15 @@
             type="email"
             placeholder="Type your email"
             class="w-full pl-10 pr-3 py-3 border-b border-gray-300 focus:border-purple-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-400 transition-colors duration-200"
-            [(ngModel)]="signupData.email"
-            name="email"
+            formControlName="email"
+            [class.border-red-500]="hasError(signupForm, 'email')"
           />
         </div>
+        @if(hasError(signupForm, 'email')) {
+        <p class="text-sm text-red-500">
+          {{ getErrorMessage(signupForm, "email") }}
+        </p>
+        }
       </div>
 
       <!-- Password Field -->
@@ -222,8 +283,8 @@
             [type]="showSignupPassword ? 'text' : 'password'"
             placeholder="Type your password"
             class="w-full pl-10 pr-12 py-3 border-b border-gray-300 focus:border-purple-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-400 transition-colors duration-200"
-            [(ngModel)]="signupData.password"
-            name="signupPassword"
+            formControlName="password"
+            [class.border-red-500]="hasError(signupForm, 'password')"
           />
           <button
             type="button"
@@ -267,6 +328,11 @@
             }
           </button>
         </div>
+        @if(hasError(signupForm, 'password')) {
+        <p class="text-sm text-red-500">
+          {{ getErrorMessage(signupForm, "password") }}
+        </p>
+        }
       </div>
 
       <!-- Confirm Password Field -->
@@ -296,8 +362,8 @@
             [type]="showConfirmPassword ? 'text' : 'password'"
             placeholder="Confirm your password"
             class="w-full pl-10 pr-12 py-3 border-b border-gray-300 focus:border-purple-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-400 transition-colors duration-200"
-            [(ngModel)]="signupData.confirmPassword"
-            name="confirmPassword"
+            formControlName="confirmPassword"
+            [class.border-red-500]="hasError(signupForm, 'confirmPassword')"
           />
           <button
             type="button"
@@ -341,14 +407,27 @@
             }
           </button>
         </div>
+        @if(hasError(signupForm, 'confirmPassword')) {
+        <p class="text-sm text-red-500">
+          {{ getErrorMessage(signupForm, "confirmPassword") }}
+        </p>
+        } @if(signupForm.errors?.['passwordMismatch'] &&
+        signupForm.get('confirmPassword')?.touched) {
+        <p class="text-sm text-red-500">Passwords do not match</p>
+        }
       </div>
 
       <!-- Signup Button -->
       <button
         type="submit"
-        class="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg"
+        [disabled]="signupForm.invalid || isLoading"
+        class="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
       >
-        SIGN UP
+        @if(isLoading) {
+        <span>Creating account...</span>
+        } @else {
+        <span>SIGN UP</span>
+        }
       </button>
     </form>
     }
